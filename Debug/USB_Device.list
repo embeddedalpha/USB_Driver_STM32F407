@@ -5,21 +5,21 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   00000188  08000000  08000000  00001000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00000694  08000188  08000188  00001188  2**2
+  1 .text         00000680  08000188  08000188  00001188  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000010  0800081c  0800081c  0000181c  2**2
+  2 .rodata       00000010  08000808  08000808  00001808  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  0800082c  0800082c  00002004  2**0
+  3 .ARM.extab    00000000  08000818  08000818  00002004  2**0
                   CONTENTS
-  4 .ARM          00000000  0800082c  0800082c  00002004  2**0
+  4 .ARM          00000000  08000818  08000818  00002004  2**0
                   CONTENTS
-  5 .preinit_array 00000000  0800082c  0800082c  00002004  2**0
+  5 .preinit_array 00000000  08000818  08000818  00002004  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  0800082c  0800082c  0000182c  2**2
+  6 .init_array   00000004  08000818  08000818  00001818  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  08000830  08000830  00001830  2**2
+  7 .fini_array   00000004  0800081c  0800081c  0000181c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         00000004  20000000  08000834  00002000  2**2
+  8 .data         00000004  20000000  08000820  00002000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   9 .ccmram       00000000  10000000  10000000  00002004  2**0
                   CONTENTS
@@ -35,15 +35,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_aranges 00000140  00000000  00000000  00004dc8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 000000d9  00000000  00000000  00004f08  2**0
+ 16 .debug_rnglists 000000d8  00000000  00000000  00004f08  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00000b33  00000000  00000000  00004fe1  2**0
+ 17 .debug_macro  00000b33  00000000  00000000  00004fe0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00002577  00000000  00000000  00005b14  2**0
+ 18 .debug_line   00002577  00000000  00000000  00005b13  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0008e22c  00000000  00000000  0000808b  2**0
+ 19 .debug_str    0008e22c  00000000  00000000  0000808a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  000962b7  2**0
+ 20 .comment      00000043  00000000  00000000  000962b6  2**0
                   CONTENTS, READONLY
  21 .debug_frame  00000348  00000000  00000000  000962fc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -66,7 +66,7 @@ Disassembly of section .text:
  800019e:	bd10      	pop	{r4, pc}
  80001a0:	20000004 	.word	0x20000004
  80001a4:	00000000 	.word	0x00000000
- 80001a8:	08000804 	.word	0x08000804
+ 80001a8:	080007f0 	.word	0x080007f0
 
 080001ac <frame_dummy>:
  80001ac:	b508      	push	{r3, lr}
@@ -78,7 +78,7 @@ Disassembly of section .text:
  80001ba:	bd08      	pop	{r3, pc}
  80001bc:	00000000 	.word	0x00000000
  80001c0:	20000008 	.word	0x20000008
- 80001c4:	08000804 	.word	0x08000804
+ 80001c4:	080007f0 	.word	0x080007f0
 
 080001c8 <GPIO_Clock_Enable>:
 
@@ -596,7 +596,7 @@ int main(void)
 
 
 	USB_Device_Init();
- 8000520:	f000 f943 	bl	80007aa <USB_Device_Init>
+ 8000520:	f000 f93a 	bl	8000798 <USB_Device_Init>
 
 
 
@@ -796,7 +796,7 @@ void SystemCoreClockUpdate(void)
  800063c:	20000000 	.word	0x20000000
  8000640:	00f42400 	.word	0x00f42400
  8000644:	017d7840 	.word	0x017d7840
- 8000648:	0800081c 	.word	0x0800081c
+ 8000648:	08000808 	.word	0x08000808
 
 0800064c <Reset_Handler>:
 
@@ -872,7 +872,7 @@ LoopFillZerobss:
 
 /* Call static constructors */
   bl __libc_init_array
- 800067a:	f000 f89f 	bl	80007bc <__libc_init_array>
+ 800067a:	f000 f895 	bl	80007a8 <__libc_init_array>
 /* Call the application's entry point.*/
   bl main
  800067e:	f7ff ff49 	bl	8000514 <main>
@@ -889,7 +889,7 @@ LoopForever:
   ldr r1, =_edata
  800068c:	20000004 	.word	0x20000004
   ldr r2, =_sidata
- 8000690:	08000834 	.word	0x08000834
+ 8000690:	08000820 	.word	0x08000820
   ldr r2, =_sbss
  8000694:	20000004 	.word	0x20000004
   ldr r4, =_ebss
@@ -962,156 +962,160 @@ void USB_Core_Init(void)
  80006ee:	af00      	add	r7, sp, #0
 	USB_Pin_Init();
  80006f0:	f7ff ffd6 	bl	80006a0 <USB_Pin_Init>
+//
+//	RCC -> AHB2ENR |= RCC_AHB2ENR_OTGFSEN  ; //ENABLE USB CORE
 
-	RCC -> AHB2ENR |= RCC_AHB2ENR_OTGFSEN  ; //ENABLE USB CORE
- 80006f4:	4b1f      	ldr	r3, [pc, #124]	@ (8000774 <USB_Core_Init+0x88>)
- 80006f6:	6b5b      	ldr	r3, [r3, #52]	@ 0x34
- 80006f8:	4a1e      	ldr	r2, [pc, #120]	@ (8000774 <USB_Core_Init+0x88>)
- 80006fa:	f043 0380 	orr.w	r3, r3, #128	@ 0x80
- 80006fe:	6353      	str	r3, [r2, #52]	@ 0x34
 
-	USB_OTG_FS -> GUSBCFG |= 0x09 << USB_OTG_GUSBCFG_TRDT_Pos;
- 8000700:	f04f 43a0 	mov.w	r3, #1342177280	@ 0x50000000
- 8000704:	68db      	ldr	r3, [r3, #12]
- 8000706:	f04f 42a0 	mov.w	r2, #1342177280	@ 0x50000000
- 800070a:	f443 5310 	orr.w	r3, r3, #9216	@ 0x2400
- 800070e:	60d3      	str	r3, [r2, #12]
-	USB_OTG_FS -> GUSBCFG |= USB_OTG_GUSBCFG_FDMOD   //FORCE DEVICE MODE
- 8000710:	f04f 43a0 	mov.w	r3, #1342177280	@ 0x50000000
- 8000714:	68db      	ldr	r3, [r3, #12]
- 8000716:	f04f 42a0 	mov.w	r2, #1342177280	@ 0x50000000
- 800071a:	f043 4380 	orr.w	r3, r3, #1073741824	@ 0x40000000
- 800071e:	f043 0340 	orr.w	r3, r3, #64	@ 0x40
- 8000722:	60d3      	str	r3, [r2, #12]
+	RCC -> AHB1ENR |= RCC_AHB1ENR_OTGHSEN  ; //ENABLE USB CORE
+ 80006f4:	4b19      	ldr	r3, [pc, #100]	@ (800075c <USB_Core_Init+0x70>)
+ 80006f6:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 80006f8:	4a18      	ldr	r2, [pc, #96]	@ (800075c <USB_Core_Init+0x70>)
+ 80006fa:	f043 5300 	orr.w	r3, r3, #536870912	@ 0x20000000
+ 80006fe:	6313      	str	r3, [r2, #48]	@ 0x30
+
+	USB_OTG_HS -> GUSBCFG |= 0x09 << USB_OTG_GUSBCFG_TRDT_Pos;
+ 8000700:	4b17      	ldr	r3, [pc, #92]	@ (8000760 <USB_Core_Init+0x74>)
+ 8000702:	68db      	ldr	r3, [r3, #12]
+ 8000704:	4a16      	ldr	r2, [pc, #88]	@ (8000760 <USB_Core_Init+0x74>)
+ 8000706:	f443 5310 	orr.w	r3, r3, #9216	@ 0x2400
+ 800070a:	60d3      	str	r3, [r2, #12]
+	USB_OTG_HS -> GUSBCFG |= USB_OTG_GUSBCFG_FDMOD   //FORCE DEVICE MODE
+ 800070c:	4b14      	ldr	r3, [pc, #80]	@ (8000760 <USB_Core_Init+0x74>)
+ 800070e:	68db      	ldr	r3, [r3, #12]
+ 8000710:	4a13      	ldr	r2, [pc, #76]	@ (8000760 <USB_Core_Init+0x74>)
+ 8000712:	f043 4380 	orr.w	r3, r3, #1073741824	@ 0x40000000
+ 8000716:	f043 0340 	orr.w	r3, r3, #64	@ 0x40
+ 800071a:	60d3      	str	r3, [r2, #12]
 			              |  USB_OTG_GUSBCFG_PHYSEL;  //SELECT PHYSCIAL LAYER
 	USB_OTG_Device -> DCFG |= USB_OTG_DCFG_DSPD; //Full speed
- 8000724:	f44f 6300 	mov.w	r3, #2048	@ 0x800
- 8000728:	681b      	ldr	r3, [r3, #0]
- 800072a:	f44f 6200 	mov.w	r2, #2048	@ 0x800
- 800072e:	f043 0303 	orr.w	r3, r3, #3
- 8000732:	6013      	str	r3, [r2, #0]
-	USB_OTG_FS -> GCCFG |= USB_OTG_GCCFG_VBUSBSEN; //ENABLE BUS SENSING
- 8000734:	f04f 43a0 	mov.w	r3, #1342177280	@ 0x50000000
- 8000738:	6b9b      	ldr	r3, [r3, #56]	@ 0x38
- 800073a:	f04f 42a0 	mov.w	r2, #1342177280	@ 0x50000000
- 800073e:	f443 2300 	orr.w	r3, r3, #524288	@ 0x80000
- 8000742:	6393      	str	r3, [r2, #56]	@ 0x38
+ 800071c:	f44f 6300 	mov.w	r3, #2048	@ 0x800
+ 8000720:	681b      	ldr	r3, [r3, #0]
+ 8000722:	f44f 6200 	mov.w	r2, #2048	@ 0x800
+ 8000726:	f043 0303 	orr.w	r3, r3, #3
+ 800072a:	6013      	str	r3, [r2, #0]
+	USB_OTG_HS -> GCCFG |= USB_OTG_GCCFG_VBUSBSEN; //ENABLE BUS SENSING
+ 800072c:	4b0c      	ldr	r3, [pc, #48]	@ (8000760 <USB_Core_Init+0x74>)
+ 800072e:	6b9b      	ldr	r3, [r3, #56]	@ 0x38
+ 8000730:	4a0b      	ldr	r2, [pc, #44]	@ (8000760 <USB_Core_Init+0x74>)
+ 8000732:	f443 2300 	orr.w	r3, r3, #524288	@ 0x80000
+ 8000736:	6393      	str	r3, [r2, #56]	@ 0x38
 
-	USB_OTG_FS -> GINTMSK |= USB_OTG_GINTMSK_ENUMDNEM
- 8000744:	f04f 43a0 	mov.w	r3, #1342177280	@ 0x50000000
- 8000748:	699a      	ldr	r2, [r3, #24]
- 800074a:	f04f 41a0 	mov.w	r1, #1342177280	@ 0x50000000
- 800074e:	4b0a      	ldr	r3, [pc, #40]	@ (8000778 <USB_Core_Init+0x8c>)
- 8000750:	4313      	orrs	r3, r2
- 8000752:	618b      	str	r3, [r1, #24]
+	USB_OTG_HS -> GINTMSK |= USB_OTG_GINTMSK_ENUMDNEM
+ 8000738:	4b09      	ldr	r3, [pc, #36]	@ (8000760 <USB_Core_Init+0x74>)
+ 800073a:	699a      	ldr	r2, [r3, #24]
+ 800073c:	4908      	ldr	r1, [pc, #32]	@ (8000760 <USB_Core_Init+0x74>)
+ 800073e:	4b09      	ldr	r3, [pc, #36]	@ (8000764 <USB_Core_Init+0x78>)
+ 8000740:	4313      	orrs	r3, r2
+ 8000742:	618b      	str	r3, [r1, #24]
 						  | USB_OTG_GINTMSK_USBSUSPM
 						  | USB_OTG_GINTMSK_IEPINT
 						  | USB_OTG_GINTMSK_OEPINT
 						  | USB_OTG_GINTMSK_RXFLVLM;
 
-	USB_OTG_FS -> GINTSTS = 0xFFFFFFFF;
- 8000754:	f04f 43a0 	mov.w	r3, #1342177280	@ 0x50000000
- 8000758:	f04f 32ff 	mov.w	r2, #4294967295
- 800075c:	615a      	str	r2, [r3, #20]
-	USB_OTG_FS -> GAHBCFG |= USB_OTG_GAHBCFG_GINT;
- 800075e:	f04f 43a0 	mov.w	r3, #1342177280	@ 0x50000000
- 8000762:	689b      	ldr	r3, [r3, #8]
- 8000764:	f04f 42a0 	mov.w	r2, #1342177280	@ 0x50000000
- 8000768:	f043 0301 	orr.w	r3, r3, #1
- 800076c:	6093      	str	r3, [r2, #8]
+	USB_OTG_HS -> GINTSTS = 0xFFFFFFFF;
+ 8000744:	4b06      	ldr	r3, [pc, #24]	@ (8000760 <USB_Core_Init+0x74>)
+ 8000746:	f04f 32ff 	mov.w	r2, #4294967295
+ 800074a:	615a      	str	r2, [r3, #20]
+	USB_OTG_HS -> GAHBCFG |= USB_OTG_GAHBCFG_GINT;
+ 800074c:	4b04      	ldr	r3, [pc, #16]	@ (8000760 <USB_Core_Init+0x74>)
+ 800074e:	689b      	ldr	r3, [r3, #8]
+ 8000750:	4a03      	ldr	r2, [pc, #12]	@ (8000760 <USB_Core_Init+0x74>)
+ 8000752:	f043 0301 	orr.w	r3, r3, #1
+ 8000756:	6093      	str	r3, [r2, #8]
 
 }
- 800076e:	bf00      	nop
- 8000770:	bd80      	pop	{r7, pc}
- 8000772:	bf00      	nop
- 8000774:	40023800 	.word	0x40023800
- 8000778:	800c3818 	.word	0x800c3818
+ 8000758:	bf00      	nop
+ 800075a:	bd80      	pop	{r7, pc}
+ 800075c:	40023800 	.word	0x40023800
+ 8000760:	40040000 	.word	0x40040000
+ 8000764:	800c3818 	.word	0x800c3818
 
-0800077c <USB_Connect>:
+08000768 <USB_Connect>:
 
 void USB_Connect(void)
 {
- 800077c:	b480      	push	{r7}
- 800077e:	af00      	add	r7, sp, #0
-	USB_OTG_FS -> GCCFG |= USB_OTG_GCCFG_PWRDWN;
- 8000780:	f04f 43a0 	mov.w	r3, #1342177280	@ 0x50000000
- 8000784:	6b9b      	ldr	r3, [r3, #56]	@ 0x38
- 8000786:	f04f 42a0 	mov.w	r2, #1342177280	@ 0x50000000
- 800078a:	f443 3380 	orr.w	r3, r3, #65536	@ 0x10000
- 800078e:	6393      	str	r3, [r2, #56]	@ 0x38
+ 8000768:	b480      	push	{r7}
+ 800076a:	af00      	add	r7, sp, #0
+	USB_OTG_HS -> GCCFG |= USB_OTG_GCCFG_PWRDWN;
+ 800076c:	4b09      	ldr	r3, [pc, #36]	@ (8000794 <USB_Connect+0x2c>)
+ 800076e:	6b9b      	ldr	r3, [r3, #56]	@ 0x38
+ 8000770:	4a08      	ldr	r2, [pc, #32]	@ (8000794 <USB_Connect+0x2c>)
+ 8000772:	f443 3380 	orr.w	r3, r3, #65536	@ 0x10000
+ 8000776:	6393      	str	r3, [r2, #56]	@ 0x38
 	USB_OTG_Device -> DCTL &= ~USB_OTG_DCTL_SDIS;
- 8000790:	f44f 6300 	mov.w	r3, #2048	@ 0x800
- 8000794:	685b      	ldr	r3, [r3, #4]
- 8000796:	f44f 6200 	mov.w	r2, #2048	@ 0x800
- 800079a:	f023 0302 	bic.w	r3, r3, #2
- 800079e:	6053      	str	r3, [r2, #4]
+ 8000778:	f44f 6300 	mov.w	r3, #2048	@ 0x800
+ 800077c:	685b      	ldr	r3, [r3, #4]
+ 800077e:	f44f 6200 	mov.w	r2, #2048	@ 0x800
+ 8000782:	f023 0302 	bic.w	r3, r3, #2
+ 8000786:	6053      	str	r3, [r2, #4]
 }
- 80007a0:	bf00      	nop
- 80007a2:	46bd      	mov	sp, r7
- 80007a4:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80007a8:	4770      	bx	lr
+ 8000788:	bf00      	nop
+ 800078a:	46bd      	mov	sp, r7
+ 800078c:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000790:	4770      	bx	lr
+ 8000792:	bf00      	nop
+ 8000794:	40040000 	.word	0x40040000
 
-080007aa <USB_Device_Init>:
+08000798 <USB_Device_Init>:
 
 #include "USB_Device_Framework.h"
 
 
 void USB_Device_Init()
 {
- 80007aa:	b580      	push	{r7, lr}
- 80007ac:	af00      	add	r7, sp, #0
+ 8000798:	b580      	push	{r7, lr}
+ 800079a:	af00      	add	r7, sp, #0
 	USB_Core_Init();
- 80007ae:	f7ff ff9d 	bl	80006ec <USB_Core_Init>
+ 800079c:	f7ff ffa6 	bl	80006ec <USB_Core_Init>
 	USB_Connect();
- 80007b2:	f7ff ffe3 	bl	800077c <USB_Connect>
+ 80007a0:	f7ff ffe2 	bl	8000768 <USB_Connect>
 }
- 80007b6:	bf00      	nop
- 80007b8:	bd80      	pop	{r7, pc}
-	...
+ 80007a4:	bf00      	nop
+ 80007a6:	bd80      	pop	{r7, pc}
 
-080007bc <__libc_init_array>:
- 80007bc:	b570      	push	{r4, r5, r6, lr}
- 80007be:	4d0d      	ldr	r5, [pc, #52]	@ (80007f4 <__libc_init_array+0x38>)
- 80007c0:	4c0d      	ldr	r4, [pc, #52]	@ (80007f8 <__libc_init_array+0x3c>)
- 80007c2:	1b64      	subs	r4, r4, r5
- 80007c4:	10a4      	asrs	r4, r4, #2
- 80007c6:	2600      	movs	r6, #0
- 80007c8:	42a6      	cmp	r6, r4
- 80007ca:	d109      	bne.n	80007e0 <__libc_init_array+0x24>
- 80007cc:	4d0b      	ldr	r5, [pc, #44]	@ (80007fc <__libc_init_array+0x40>)
- 80007ce:	4c0c      	ldr	r4, [pc, #48]	@ (8000800 <__libc_init_array+0x44>)
- 80007d0:	f000 f818 	bl	8000804 <_init>
- 80007d4:	1b64      	subs	r4, r4, r5
- 80007d6:	10a4      	asrs	r4, r4, #2
- 80007d8:	2600      	movs	r6, #0
- 80007da:	42a6      	cmp	r6, r4
- 80007dc:	d105      	bne.n	80007ea <__libc_init_array+0x2e>
- 80007de:	bd70      	pop	{r4, r5, r6, pc}
- 80007e0:	f855 3b04 	ldr.w	r3, [r5], #4
- 80007e4:	4798      	blx	r3
- 80007e6:	3601      	adds	r6, #1
- 80007e8:	e7ee      	b.n	80007c8 <__libc_init_array+0xc>
- 80007ea:	f855 3b04 	ldr.w	r3, [r5], #4
- 80007ee:	4798      	blx	r3
- 80007f0:	3601      	adds	r6, #1
- 80007f2:	e7f2      	b.n	80007da <__libc_init_array+0x1e>
- 80007f4:	0800082c 	.word	0x0800082c
- 80007f8:	0800082c 	.word	0x0800082c
- 80007fc:	0800082c 	.word	0x0800082c
- 8000800:	08000830 	.word	0x08000830
+080007a8 <__libc_init_array>:
+ 80007a8:	b570      	push	{r4, r5, r6, lr}
+ 80007aa:	4d0d      	ldr	r5, [pc, #52]	@ (80007e0 <__libc_init_array+0x38>)
+ 80007ac:	4c0d      	ldr	r4, [pc, #52]	@ (80007e4 <__libc_init_array+0x3c>)
+ 80007ae:	1b64      	subs	r4, r4, r5
+ 80007b0:	10a4      	asrs	r4, r4, #2
+ 80007b2:	2600      	movs	r6, #0
+ 80007b4:	42a6      	cmp	r6, r4
+ 80007b6:	d109      	bne.n	80007cc <__libc_init_array+0x24>
+ 80007b8:	4d0b      	ldr	r5, [pc, #44]	@ (80007e8 <__libc_init_array+0x40>)
+ 80007ba:	4c0c      	ldr	r4, [pc, #48]	@ (80007ec <__libc_init_array+0x44>)
+ 80007bc:	f000 f818 	bl	80007f0 <_init>
+ 80007c0:	1b64      	subs	r4, r4, r5
+ 80007c2:	10a4      	asrs	r4, r4, #2
+ 80007c4:	2600      	movs	r6, #0
+ 80007c6:	42a6      	cmp	r6, r4
+ 80007c8:	d105      	bne.n	80007d6 <__libc_init_array+0x2e>
+ 80007ca:	bd70      	pop	{r4, r5, r6, pc}
+ 80007cc:	f855 3b04 	ldr.w	r3, [r5], #4
+ 80007d0:	4798      	blx	r3
+ 80007d2:	3601      	adds	r6, #1
+ 80007d4:	e7ee      	b.n	80007b4 <__libc_init_array+0xc>
+ 80007d6:	f855 3b04 	ldr.w	r3, [r5], #4
+ 80007da:	4798      	blx	r3
+ 80007dc:	3601      	adds	r6, #1
+ 80007de:	e7f2      	b.n	80007c6 <__libc_init_array+0x1e>
+ 80007e0:	08000818 	.word	0x08000818
+ 80007e4:	08000818 	.word	0x08000818
+ 80007e8:	08000818 	.word	0x08000818
+ 80007ec:	0800081c 	.word	0x0800081c
 
-08000804 <_init>:
- 8000804:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8000806:	bf00      	nop
- 8000808:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 800080a:	bc08      	pop	{r3}
- 800080c:	469e      	mov	lr, r3
- 800080e:	4770      	bx	lr
+080007f0 <_init>:
+ 80007f0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80007f2:	bf00      	nop
+ 80007f4:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80007f6:	bc08      	pop	{r3}
+ 80007f8:	469e      	mov	lr, r3
+ 80007fa:	4770      	bx	lr
 
-08000810 <_fini>:
- 8000810:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8000812:	bf00      	nop
- 8000814:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8000816:	bc08      	pop	{r3}
- 8000818:	469e      	mov	lr, r3
- 800081a:	4770      	bx	lr
+080007fc <_fini>:
+ 80007fc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80007fe:	bf00      	nop
+ 8000800:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8000802:	bc08      	pop	{r3}
+ 8000804:	469e      	mov	lr, r3
+ 8000806:	4770      	bx	lr

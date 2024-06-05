@@ -1,4 +1,4 @@
 ../USB_Device/USB_Device_Driver.c:14:6:USB_Pin_Init	1
 ../USB_Device/USB_Device_Driver.c:23:6:USB_Core_Init	1
-../USB_Device/USB_Device_Driver.c:49:6:USB_Connect	1
-../USB_Device/USB_Device_Driver.c:55:6:USB_Disconnect	1
+../USB_Device/USB_Device_Driver.c:52:6:USB_Connect	1
+../USB_Device/USB_Device_Driver.c:58:6:USB_Disconnect	1
